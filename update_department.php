@@ -1,28 +1,38 @@
 <?php
-session_start();
-$conn=mysqli_connect("localhost","root","");
-mysqli_select_db($conn,'project');
 
-if(!isset($_SESSION["flag"])){
-	 header('location:login.php');
-	 die();
-	}
+include('function.php');
+
+//$id=$_GET['rn'];
 
 
 
-/*
-if(!isset($_POST['submit']))
+
+$udepartment=$_GET['dn'];
+
+
+
+if(isset($_POST['submit']))
 {
-		$_SESSION["email"];
-		$_SESSION["password"];
-		$_SESSION["flag"] = $flag;
-
-	   
+	$departmentid=$_GET['rn'];
+    $updatedepartment = $_POST['department'];
+    
+    $array=['id'=>$departmentid,'department'=>$updatedepartment];
+    if(updateDepartment($conn,$array))
+    {
+		
+		echo "<script>RECORD Updated FROM DATABASE</script>";
+		
+		}
+    
+    	else{
+			echo "error";
+			}
 	}
 
 
-*/
+
 ?>
+
 
 
 
@@ -30,10 +40,13 @@ if(!isset($_POST['submit']))
 <html lang="en">
 <head>
 <?php include('header.php');   ?>
-</head>
+
+
+
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<?php   include('slider.php');      ?>
+<?php   include('slider.php'); 	?>
 
 
 
@@ -42,6 +55,31 @@ if(!isset($_POST['submit']))
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+  
+
+
+	   <div class="container">
+	   <h2>WELCOME </h2>
+	   <h4>You Can Update A Department</h4>
+	   </div>
+	    <div class="container" style="width:60% ; height:auto;">
+			<div class="card card-info">
+  <form action="" method="post">
+	  <br>
+	 
+	
+ 
+  <div class="mb-3">
+   <center style="background-color:blue;"><label class="form-label" style="color:white;">Update Department</label></center>
+    <input type="text" class="form-control"  name="department" value="<?php  echo $udepartment     ?>"	>
+  </div>
+  
+  
+  <button type="submit" name="submit" class="btn btn-success btn-block">Update Data</button>
+  
+  </form>
+  </div>
+  </div>
   
           
     </div>
@@ -93,3 +131,41 @@ if(!isset($_POST['submit']))
 <script src="dist/js/pages/dashboard.js"></script>
 </body>
 </html>
+
+<?php
+/*
+ if ($_SERVER["REQUEST_METHOD"] == "POST")
+ {
+	 
+	  $department=ucwords($_POST['department']);
+	 
+	 
+	
+	 
+	
+ 
+	 $query="UPDATE `department_detail` SET `department`='$department' WHERE id=$id";
+	
+	 
+	 $data=mysqli_query($conn,$query);
+	  
+
+if($data)
+{
+	echo "<script>RECORD DELETE FROM DATABASE</script>";
+		
+	?>
+	<META HTTP-EQUIV="Refresh" CONTENT="0 URL=http://localhost/project/view_department.php">
+	
+	<?php 
+}
+	else {
+		echo "<script>RECORD DELETE FROM DATABASE</script>";	
+		}
+
+
+}
+*/
+?>
+
+

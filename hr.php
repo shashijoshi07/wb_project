@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 $conn=mysqli_connect("localhost","root","");
 mysqli_select_db($conn,'project');
@@ -10,18 +11,10 @@ if(!isset($_SESSION["flag"])){
 
 
 
-/*
-if(!isset($_POST['submit']))
-{
-		$_SESSION["email"];
-		$_SESSION["password"];
-		$_SESSION["flag"] = $flag;
-
-	   
-	}
 
 
-*/
+
+
 ?>
 
 
@@ -29,11 +22,11 @@ if(!isset($_POST['submit']))
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include('header.php');   ?>
+<?php include('header_hr.php');   ?>
 </head>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<?php   include('slider.php');      ?>
+<?php   include('slider_hr.php');      ?>
 
 
 

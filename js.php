@@ -1,55 +1,4 @@
-<?php
-session_start();
-$conn=mysqli_connect("localhost","root","");
-mysqli_select_db($conn,'project');
-
-if(!isset($_SESSION["flag"])){
-	 header('location:login.php');
-	 die();
-	}
-
-
-
-/*
-if(!isset($_POST['submit']))
-{
-		$_SESSION["email"];
-		$_SESSION["password"];
-		$_SESSION["flag"] = $flag;
-
-	   
-	}
-
-
-*/
-?>
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<?php include('header.php');   ?>
-</head>
-</head>
-<body class="hold-transition sidebar-mini layout-fixed">
-<?php   include('slider.php');      ?>
-
-
-
-
-
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-  
-          
-    </div>
-  <!-- /.content-wrapper -->
-  
- <?php  include('footer.php');    ?>
-
-  <!-- Control Sidebar -->
+<!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
   </aside>
@@ -91,5 +40,3 @@ if(!isset($_POST['submit']))
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
-</body>
-</html>

@@ -1,27 +1,13 @@
+
 <?php
-session_start();
+
 $conn=mysqli_connect("localhost","root","");
 mysqli_select_db($conn,'project');
 
-if(!isset($_SESSION["flag"])){
-	 header('location:login.php');
-	 die();
-	}
 
 
 
-/*
-if(!isset($_POST['submit']))
-{
-		$_SESSION["email"];
-		$_SESSION["password"];
-		$_SESSION["flag"] = $flag;
 
-	   
-	}
-
-
-*/
 ?>
 
 
@@ -30,10 +16,13 @@ if(!isset($_POST['submit']))
 <html lang="en">
 <head>
 <?php include('header.php');   ?>
-</head>
+
+
+
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<?php   include('slider.php');      ?>
+<?php   include('slider.php'); 	?>
 
 
 
@@ -42,6 +31,31 @@ if(!isset($_POST['submit']))
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+  
+
+
+	   <div class="container">
+	   <h2>WELCOME </h2>
+	   <h4>You Can Create A New Department</h4>
+	   </div>
+	    <div class="container" style="width:60% ; height:auto;">
+			<div class="card card-info">
+  <form action="" method="post">
+	  <br>
+	 
+	
+ 
+  <div class="mb-3">
+   <center style="background-color:blue;"><label class="form-label" style="color:white;">Department</label></center>
+    <input type="text" class="form-control"  name="department"	>
+  </div>
+  
+  
+  <button type="submit" name="submit" class="btn btn-success btn-block">Insert</button>
+  
+  </form>
+  </div>
+  </div>
   
           
     </div>
@@ -93,3 +107,63 @@ if(!isset($_POST['submit']))
 <script src="dist/js/pages/dashboard.js"></script>
 </body>
 </html>
+
+
+<?php
+
+ 
+ 
+ 
+  
+
+  //error_reporting(0);
+ 
+
+
+ if ($_SERVER["REQUEST_METHOD"] == "POST")
+ {
+	 
+	  $department=ucwords($_POST['department']);
+	 
+	 
+	
+	 
+	 if($query="SELECT * FROM  department_detail WHERE department='$department'")
+         $result=mysqli_query($conn,$query);
+         
+         if(mysqli_num_rows($result)>0){
+			 echo "department is used";
+			 } 
+			 else{
+ 
+	 $query="INSERT INTO `department_detail`(`department`) VALUES ('$department')";
+	
+	 
+	 $data=mysqli_query($conn,$query);
+	
+	
+	if($data){
+		
+	
+	echo '<script type="text/javascript"> alert("department created")</script>';
+
+}
+  else {
+	  
+	  echo '<script type="text/javascript"> alert("department exist")</script>';
+	  
+	  }
+   
+   
+   
+    }
+
+
+
+}
+
+?>
+
+
+
+

@@ -1,28 +1,45 @@
+
+
+
 <?php
-session_start();
-$conn=mysqli_connect("localhost","root","");
-mysqli_select_db($conn,'project');
 
-if(!isset($_SESSION["flag"])){
-	 header('location:login.php');
-	 die();
-	}
+include('function.php');
 
 
 
-/*
-if(!isset($_POST['submit']))
+$urole=$_GET['dn'];
+
+if(isset($_POST['submit']))
 {
-		$_SESSION["email"];
-		$_SESSION["password"];
-		$_SESSION["flag"] = $flag;
+	$roleid=$_GET['nn'];
+    $updaterole = $_POST['role'];
+    
+    $array=['id'=>$roleid,'role'=>$updaterole];
+    if(updateRole($conn,$array))
+    {
+		
+		 
+		echo '<script type="text/javascript"> alert("Updated")</script>';
+		  
+		}
 
-	   
-	}
+		
+		}
+    
+    	else
+    	{
+			echo "error";
+			
+			}
+	
 
-
-*/
 ?>
+
+
+
+
+
+
 
 
 
@@ -30,10 +47,13 @@ if(!isset($_POST['submit']))
 <html lang="en">
 <head>
 <?php include('header.php');   ?>
-</head>
+
+
+
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<?php   include('slider.php');      ?>
+<?php   include('slider.php'); 	?>
 
 
 
@@ -42,6 +62,31 @@ if(!isset($_POST['submit']))
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+  
+
+
+	   <div class="container">
+	   
+	   <h4> Update A  Role</h4>
+	   </div>
+	    <div class="container" style="width:60% ; height:auto;">
+			<div class="card card-info">
+  <form action="" method="post">
+	  <br>
+	 
+	
+ 
+  <div class="mb-3">
+   <center style="background-color:blue;"><label class="form-label" style="color:white;">Role</label></center>
+    <input type="text" class="form-control"  name="role" value="<?php  echo $urole     ?>"		>
+  </div>
+  
+  
+  <button type="submit" name="submit" class="btn btn-success btn-block">Update Role</button>
+  
+  </form>
+  </div>
+  </div>
   
           
     </div>
@@ -93,3 +138,55 @@ if(!isset($_POST['submit']))
 <script src="dist/js/pages/dashboard.js"></script>
 </body>
 </html>
+
+
+<?php
+
+ 
+ 
+ 
+  
+
+  //error_reporting(0);
+ 
+
+/*
+  if ($_SERVER["REQUEST_METHOD"] == "POST")
+ {
+	 
+	  $role=ucwords($_POST['role']);
+	 
+	 
+	
+	 
+	
+ 
+	 $query="UPDATE `role_detail` SET `role`='$role' WHERE id=$id";
+	
+	 
+	 $data=mysqli_query($conn,$query);
+	  
+
+if($data)
+{
+	echo "<script>RECORD DELETE FROM DATABASE</script>";
+		
+	?>
+	<META HTTP-EQUIV="Refresh" CONTENT="0 URL=http://localhost/project/view_role.php">
+	
+	<?php 
+}
+	else {
+		echo "<script>RECORD DELETE FROM DATABASE</script>";	
+		}
+
+
+}
+
+*/
+?>
+
+
+
+
+

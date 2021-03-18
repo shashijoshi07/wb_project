@@ -1,27 +1,13 @@
+
 <?php
-session_start();
-$conn=mysqli_connect("localhost","root","");
-mysqli_select_db($conn,'project');
 
-if(!isset($_SESSION["flag"])){
-	 header('location:login.php');
-	 die();
-	}
+//$conn=mysqli_connect("localhost","root","");
+//mysqli_select_db($conn,'project');
 
 
 
-/*
-if(!isset($_POST['submit']))
-{
-		$_SESSION["email"];
-		$_SESSION["password"];
-		$_SESSION["flag"] = $flag;
+include('function.php');
 
-	   
-	}
-
-
-*/
 ?>
 
 
@@ -30,10 +16,41 @@ if(!isset($_POST['submit']))
 <html lang="en">
 <head>
 <?php include('header.php');   ?>
-</head>
+
+<script>
+function checkdelete()
+{
+  var x = confirm("Are you sure you want to delete?");
+  if (x)
+      return true;
+  else
+    return false;
+}
+</script>
+
+
+<style type="text/css">
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+
+}
+
+tr:nth-child(even) {
+    background-color: white;
+}
+</style>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<?php   include('slider.php');      ?>
+<?php   include('slider.php'); 	?>
 
 
 
@@ -42,6 +59,54 @@ if(!isset($_POST['submit']))
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+  
+    <h3>&nbsp;&nbsp;List Of Role</h3>
+    
+    
+<?php
+
+//$result = mysqli_query($conn,"SELECT * FROM role_detail");
+
+//if (mysqli_num_rows($result) > 0)
+
+$getRole = getRole($conn);	
+ if($getRole[0]!=0)
+{
+?>
+  <table style="padding:10px; margin-left:25px; margin-top:25px;">
+  
+  <tr>
+    <td>ID</td>
+    <td>Role</td>
+    <td colspan="2"><center>ACTION</center></td>
+    
+  </tr>
+<?php
+$i=1;
+foreach($getRole as $records) {     //records array ko string mai le raha h
+?>
+<tr>
+    <td><?php echo $i; ?></td>
+    <td><?php echo $records["role"]; ?></td>
+    <td><?php echo "<a href='http://localhost/project/delete.php?nn=$records[id]' onclick='return checkdelete()'><input type='submit' value='DELETE' id='deletebtn'></a>" ?></td>
+    <td><?php echo "<a href='http://localhost/project/update_role.php?nn=$records[id]&dn=$records[role]' onclick='return checkupdate()'><input type='submit' value='UPDATE' id='deletebtn'></a>" ?></td>
+
+</tr>
+<?php
+$i++;
+}
+?>
+</table>
+ <?php
+}
+else{
+    echo "No result found";
+}
+?>
+ 
+
+
+   
   
           
     </div>
@@ -93,3 +158,8 @@ if(!isset($_POST['submit']))
 <script src="dist/js/pages/dashboard.js"></script>
 </body>
 </html>
+
+
+
+
+

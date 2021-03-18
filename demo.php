@@ -1,27 +1,9 @@
+
 <?php
 session_start();
 $conn=mysqli_connect("localhost","root","");
 mysqli_select_db($conn,'project');
 
-if(!isset($_SESSION["flag"])){
-	 header('location:login.php');
-	 die();
-	}
-
-
-
-/*
-if(!isset($_POST['submit']))
-{
-		$_SESSION["email"];
-		$_SESSION["password"];
-		$_SESSION["flag"] = $flag;
-
-	   
-	}
-
-
-*/
 ?>
 
 
@@ -29,19 +11,51 @@ if(!isset($_POST['submit']))
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include('header.php');   ?>
-</head>
+<?php include('header.php');  ?>
+
+
+
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<?php   include('slider.php');      ?>
-
-
-
+ 
 
 
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+  
+
+
+   <div class="container">
+  <form action="" method="post" style="margin-left:10px;  padding:5px;">
+	  
+   
+    
+    
+   <div class="form-group"> <!-- Date input -->
+       <th>DOB <td>
+		   <input type="date" name="birthday" />
+  
+      
+     
+             
+              
+       
+      
+             
+            
+             <div class="form-group">
+			<label>Enter Your Address</label>	 
+             <input type="text" name="address" required>
+           </div>
+                                         
+ 
+  <br>
+
+  <button type="submit" name="submit" class="btn btn-success">Submit</button>
+  </form>
+  </div>
   
           
     </div>
@@ -93,3 +107,61 @@ if(!isset($_POST['submit']))
 <script src="dist/js/pages/dashboard.js"></script>
 </body>
 </html>
+
+
+<?php
+
+
+ 
+ 
+  
+  //error_reporting(0);
+ 
+
+
+ if (isset($_POST['submit']))
+ {
+	 
+      $birthday	=	$_POST['birthday'];
+	  $address	=	$_POST['address'];
+	  
+	 //echo "<pre>";
+	// print_r($_POST);
+	// exit();
+     
+
+	 
+	
+		
+		
+		
+		
+      
+     
+ 
+	 $query="INSERT INTO `employee`(`birthday`,`address`) VALUES ('$birthday','$address')";
+	
+	 
+	 $data=mysqli_query($conn,$query);
+	
+	
+	if($data){
+	echo "registerd";
+}
+ 
+  else {echo "fail";
+	  }
+    
+
+
+
+}
+
+
+
+
+?>
+
+
+
+
