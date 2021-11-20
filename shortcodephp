@@ -1,0 +1,59 @@
+//for shortcode of testimonila
+
+function dummy(){
+
+     $allPostsWPQuery = new WP_Query(array('post_type'=>'spt_testimonial',
+    'posts_per_page'=>-1)); ?>
+           
+           <?php
+           $data = '';
+           if ( $allPostsWPQuery->have_posts() ) : ?>
+           
+                 <?php $count=1;  
+                 $status= '';  
+                 $data .='<div class="testi-wrap">'; ?>
+                <?php while ( $allPostsWPQuery->have_posts() ) : $allPostsWPQuery->the_post(); ?>
+                   <?php $content =  get_the_content(); ?>
+                   <?php $image = get_the_post_thumbnail();  ?>
+                   <?php   $id = get_the_ID();  ?>
+                    <?php  $title = get_the_title();  ?>
+                   <?php  $name = get_post_meta($id,'sp_tpro_meta_options',true);//inspect se pata chla ya array se bhi pata chl skata h 
+                          $nm = $name['tpro_name'];
+                          $tm = $name['tpro_designation'];
+                      ?>
+                     
+               <?php
+                   if($count == 1)
+                  {
+                     $status = "active";
+                  }
+                  else
+                  {
+                    $status = "inactive";
+                  }  
+               $data .= ' <div class="client-single '.$status.' position-'.$count.'" data-position="position-'.$count.'">
+               <div class="client-img">
+                   '.$image.'
+               </div>
+               <div class="client-comment">
+                   <h3>'." $content".' </h3><br>
+                   <h1>'."$nm".' </h1>
+                   <p>'."$tm".' </p>
+                   <span><i class="fa fa-quote-left"></i></span>
+               </div>
+               </div>
+                ';
+                 ?>
+               
+               <?php
+               
+               $count++;  
+               endwhile;
+               $data .='</div>'; ?>
+                <?php wp_reset_postdata(); ?>
+           <?php endif; return $data; ?>
+           <?php
+// $data ='    ';
+//  return $data;
+}
+add_shortcode('dummy_test','dummy');
